@@ -9,7 +9,7 @@ import termcolor
 
 class Container:
 
-    def __init__(self, filename : str, createNew : bool = False) -> None :
+    def __init__(self, filename : str, password : str = None, createNew : bool = False) -> None :
         """Init function
 
         Args:
@@ -96,9 +96,15 @@ class Container:
         return self.read(encoding=encoding).split(delimitor)
 
 
-    def xorCrypt(self, password : str, outputFile : str) -> None :
+    def xorCrypt(self, password : str = None, outputFile : str) -> None :
         if outputFile == self.__filename:
             raise FileExistsError("You can't replace your actual file, for the moment...")
+
+        if not password:
+            if not self.__password:
+                raise ValueError("No password passed, no argument and no attribute")
+
+            password = self.__password
 
         hashedPasswd = hashlib.sha256(password.encode('utf-8')).digest()
         
