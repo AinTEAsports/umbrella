@@ -23,6 +23,7 @@ class Container:
 
         self.__filename = filename
         self.__absolutePath = os.path.abspath(self.__filename)
+        self.__password = password
 
 
     def write(self, text : str) -> None :
