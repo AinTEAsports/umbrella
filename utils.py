@@ -156,6 +156,17 @@ class Container:
             f.write("{}")
 
 
+    def reinitialize(self, forceReinitalize : bool = False) -> None :
+        if forceReinitalize:
+            try:
+                os.remove(self.__filename)
+            except FileNotFoundError:
+                pass
+
+        with open(self.__filename, 'w', encoding="utf-8") as f:
+            f.write("{}\n")
+
+
 
 class ColoredString:
 
